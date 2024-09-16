@@ -1,0 +1,260 @@
+*{
+    --primary-color: #FFFFFF;
+    --primary2-color: #363738;
+    --secondary-color: #F5F5F5;
+    --secondary1-color: #FEFAF1;
+    --secondary2-color: #DB4444;
+    --text: #FAFAFA;
+    --text1: #7D8184;
+    --text2: #000000;
+    --button: #000000;
+    --button1: #00FF66;
+    --button2: #DB4444;
+    --button2-hover: #E07575;
+    --button1-hover: #A0BCE0;
+}
+
+img{
+    width: 100%;
+    height: auto;
+}
+a{
+    text-decoration: none;
+    color: var(--text2);
+}
+.icon{
+    width: 25px;
+}
+.user-icon{
+    cursor: pointer;
+    background-color: var(--secondary2-color);
+    border-radius: 50%;
+    padding: 5px;
+}
+
+.user-icon img{
+    width: 25px;
+    height: 25px;
+}
+/*--------------------------------- header ---------------------------------*/
+header{
+    margin-top:10px ;
+    height: 8vh;
+    position: relative;
+}
+.navbar{
+    align-content: center;
+    justify-content: space-between;
+}
+.navbar-brand{
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text2);
+}
+.navbar-collapse{
+    flex-grow: 0;
+}
+.navbar-collapse ul{
+   gap: 30px;
+}
+.navbar-collapse ul li a{
+    color: var(--text2);
+}
+.nav-right{
+    width: fit-content;
+    align-items: center;
+   display: flex;
+    gap: 20px;
+}
+.input-group{
+    background-color: var(--secondary-color);
+}
+.input-group input{
+    background-color: var(--secondary-color);
+    border: none;
+    color: var(--text2);
+}
+.header-btn{
+    border: none;
+    border-radius: 5px;
+}
+
+.user-menu{
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: rgb(0,0,0,0.04);
+    backdrop-filter: blur(150px);
+    border-radius: 5px;
+    display: none;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+}
+.user-menu a{
+    color: var(--secondary-color);
+    display: flex;
+    gap: 15px;
+    font-size: 14px;
+}
+.open{
+    display: flex;
+}
+
+/*--------------------------------- sign up ---------------------------------*/
+.sign-up{
+    display: flex;
+    padding: 50px 0;
+    height: calc(92vh - 10px );
+    gap: 100px;
+}
+.sign-up > img{
+    height: 100%;
+    width: fit-content;
+}
+.signUp-content{
+    padding: 0 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    gap: 20px;
+    width: 50%;
+}
+.signUp-header{
+    width: 100%;
+}
+.signUp-header h1{
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--text2);
+}
+.signUp-header p{
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text1);
+}
+.sign-up form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+.sign-up input{
+    padding: 10px;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid var(--text1);
+    color: var(--text2);
+}
+.signUp-buttons{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+.signUp-buttons .btn{
+    background-color: var(--button2);
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    color: var(--text);
+}
+.signUp-buttons .btn2{
+    background-color: var(--primary-color);
+    color: var(--primary2-color);
+    border: var(--primary2-color) 1px solid;
+}
+.signUp-buttons .btn1:hover{
+    background-color: var(--button2-hover);
+}
+.signUp-buttons .btn2:hover{
+    background-color: var(--button1-hover);
+}
+
+.signUp-footer{
+    font-size: 16px;
+    font-weight: 400;
+}
+.signUp-footer a{
+    font-weight: 600;
+    margin-left: 5px;
+}
+
+
+.signup_message{
+    position: absolute;
+    display: none;
+    gap: 40px;
+    flex-direction: column;
+    width: 400px;
+    height: 600px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: rgba(9, 178, 133);
+    backdrop-filter: blur(150px);
+    color: var(--text);
+
+}
+.signup_message h1{
+    font-size: 60px;
+    font-weight: 600;
+}
+.signup_message p{
+    font-size: 20px;
+    font-weight: 400;
+}
+.signup_message a{
+    font-weight: 600;
+    margin-left: 5px;
+}
+.signup_message div{
+    padding: 10px;
+    background: var(--secondary-color);
+    border-radius: 50%;
+}
+.signup_message div img{
+    width: 50px;
+    height: 50px;
+}
+.signup_message .btn{
+    background-color: var(--button2);
+    padding: 10px 50px;
+    color: var(--text);
+    font-size: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**/
+@media screen and (max-width: 992px){
+    .nav-right{
+        display: none;
+    }
+}
