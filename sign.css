@@ -1,0 +1,187 @@
+.sign-up{
+    position: relative;
+    display: flex;
+    padding: 50px 0;
+}
+.signUp-content{
+    flex: 60%;
+    padding: 0 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    gap: 20px;
+}
+.signUp-header{
+    width: 100%;
+}
+.signUp-header h1{
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--text2);
+}
+.signUp-header p{
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text1);
+}
+.sign-up form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+.sign-up input{
+    padding: 10px;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid var(--text1);
+    color: var(--text2);
+}
+.signUp-buttons{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+.signUp-buttons .btn{
+    background-color: var(--button2);
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    color: var(--text);
+}
+.signUp-buttons .btn2{
+    background-color: var(--primary-color);
+    color: var(--primary2-color);
+    border: var(--primary2-color) 1px solid;
+}
+.signUp-buttons .btn1:hover{
+    background-color: var(--button2-hover);
+}
+.signUp-buttons .btn2:hover{
+    background-color: var(--button1-hover);
+}
+
+.signUp-footer{
+    font-size: 16px;
+    font-weight: 400;
+}
+.signUp-footer a{
+    font-weight: 600;
+    margin-left: 5px;
+}
+.signup_message{
+    position: absolute;
+    display: none;
+    gap: 40px;
+    flex-direction: column;
+    width: 400px;
+    height: 600px;
+    top: 0;
+    left: calc(50% - 200px); ;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: rgba(9, 178, 133);
+    backdrop-filter: blur(150px);
+    color: var(--text);
+
+}
+.signup_message h1{
+    font-size: 60px;
+    font-weight: 600;
+}
+.signup_message p{
+    font-size: 20px;
+    font-weight: 400;
+}
+.signup_message a{
+    font-weight: 600;
+    margin-left: 5px;
+}
+.signup_message div{
+    padding: 10px;
+    background: var(--secondary-color);
+    border-radius: 50%;
+}
+.signup_message div img{
+    width: 50px;
+    height: 50px;
+}
+.signup_message .btn{
+    background-color: var(--button2);
+    padding: 10px 50px;
+    color: var(--text);
+    font-size: 20px;
+}
+
+/* media queries */
+/* 1200px */
+@media screen and (max-width: 1199px){
+    .signUp-content{
+        padding: 0 50px;
+    }
+    .signUp-content h1{
+        font-size: 32px;
+    }
+    .signUp-content p{
+        font-size: 14px;
+    }
+    .signUp-buttons .btn{
+        padding: 10px 30px;
+    }
+    .signup_message{
+        width: 350px;
+        height: 550px;
+        left: calc(50% - 175px); ;
+    }
+    .signup_message h1{
+        font-size: 50px;
+    }
+    .signup_message p{
+        font-size: 18px;
+    }
+    .signup_message .btn{
+        padding: 10px 40px;
+        font-size: 18px;
+    }
+}
+/* 1024px */
+@media screen and (max-width: 1023px){
+    .sign-up  .sign-image{
+        display: none;
+    }
+    .signUp-content{
+        padding: 0 30px;
+    }
+    .signUp-content h1{
+        font-size: 30px;
+    }
+    .signUp-content p{
+        font-size: 14px;
+    }
+    .sign-up form{
+        padding: 0;
+    }
+    .signUp-buttons .btn{
+        padding: 10px 25px;
+    }
+    .signup_message{
+        width: 320px;
+        height: 520px;
+        left: calc(50% - 160px); ;
+    }
+    .signup_message h1{
+        font-size: 45px;
+    }
+    .signup_message p{
+        font-size: 16px;
+    }
+    .signup_message .btn{
+        padding: 10px 35px;
+        font-size: 16px;
+    }
+}
