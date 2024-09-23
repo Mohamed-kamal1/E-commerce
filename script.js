@@ -83,7 +83,6 @@ function logout() {
         }, false)
       })
 })()
-
 // Scroll cards
 function scrollCards(direction ,section_number) {
   let section, card, value ;
@@ -102,7 +101,7 @@ function scrollCards(direction ,section_number) {
         break;
 
   }
-  value =document.querySelector(card).offsetWidth + 40 ;
+  value = document.querySelector(card).offsetWidth + 40 ;
   value =  direction === 'left' ? value*-1: value;
   document.getElementById(section).scrollBy({
     left: value, // Adjust this value based on card width
@@ -135,12 +134,9 @@ Cards.forEach((card) => {
     });
   }
 });
-
 /////////////////////////////////////////////////////////////////////////////
-
 let cart = document.querySelector('.cart-items');
 const products =  JSON.parse(localStorage.getItem('products')) || [];
-
 if(window.location.href.includes('Cart.html')){
   updateCheckout();
   products.forEach(product => {
@@ -190,7 +186,47 @@ if(window.location.href.includes('Cart.html')){
     window.location.reload();
   });
 }
+/////////////////////////////////////////////////////////////////////////////
+if(window.location.href.includes('Home.html')){
+  let Timer = document.querySelector('.timer');
+  let countDownDate = new Date("OCT 10, 2024 00:00:00").getTime();
+    let x = setInterval(function() {
+        let now = new Date().getTime();
+        let distance = countDownDate - now;
+        let days = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2,0);
+        let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2,0);
+        let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2,0);
+        let seconds = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2,0);
+        if (distance < 0) {
+        clearInterval(x);
+        }
+        else {
+            Timer.innerHTML = `
+            <div>
+                <span>Days</span>
+                <span>${days}</span>
+            </div>
+            <span>:</span>
+            <div>
+                <span>Hours</span>
+                <span>${hours}</span>
+            </div>
+            <span>:</span>
+            <div>
+                <span>Minutes</span>
+                <span>${minutes}</span>
+            </div>
+            <span>:</span>
+            <div>
+                <span>Seconds</span>
+                <span>${seconds}</span>
+            </div>
+            `;
+        }
+    }, 1000);
 
+
+}
 // Update cart number
 function updateCartNumber(){
   let products =  JSON.parse(localStorage.getItem('products')) || [];

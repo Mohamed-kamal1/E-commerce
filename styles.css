@@ -14,6 +14,7 @@
     --button2-hover: #E07575;
     --button1-hover: #A0BCE0;
     --ultramarine : #120A8F;
+    --desert-sand: #878681;
     transition: 0.3s;
 
 }
@@ -333,7 +334,6 @@ section .card-content .rate span{
 .section1 {
     flex-direction: row;
 }
-
 .section1 aside{
     display: flex;
     flex: 20%;
@@ -352,14 +352,47 @@ section .card-content .rate span{
     margin: 0;
 
 }
-.section1 .cover{
+.slider{
     flex: 80%;
+    position: relative;
+    display: flex;
+    overflow-x: hidden;
+    scroll-snap-type: x mandatory;
+    margin: 20px 0;
+}
+.slider button{
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    padding: 10px;
+    margin-top: -22px;
+    color: #eee;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border: none;
+    background-color: rgba(255,255,255,0.1);
+    border-radius: 50%;
+
+}
+.pre{
+    left: 0.5%;
+}
+.next{
+    right: 0.5%;
+}
+.slider button:hover{
+    background-color: rgba(0,0,0,0.1);
+}
+
+.section1 .cover{
+    flex: 0 0 calc(100%);
     object-fit: cover;
-    background-image: linear-gradient(#000,var(--ultramarine), #fff);
     color: var(--text);
-    margin: 20px;
     padding: 30px;
     border-radius: 5px;
+    animation-name: display;
+    animation-duration: 1s;
 }
 .section1 .cover_head{
     display: flex;
@@ -373,6 +406,19 @@ section .card-content .rate span{
     flex-direction: column;
     gap: 20px;
     justify-content: center;
+}
+.section1 .s1-content div{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: 24px;
+}
+.section1 .s1-content img{
+    height: 24px;
+    width: fit-content;
+}
+.section1 .s1-content div span{
+   font-weight: 700;
 }
 .section1 .s1-content h1{
     font-size: 45px;
@@ -388,9 +434,6 @@ section .card-content .rate span{
     margin-left: 10px;
 }
 
-.section1 .s1-content img{
-    width: 40px;
-}
 .section1 .cover_image{
     display: flex;
     justify-content: center;
@@ -398,18 +441,22 @@ section .card-content .rate span{
     flex: 50%;
 }
 .section1 .cover_footer{
+    position: absolute;
+    bottom: 10%;
+    left: calc(50% - 50px);
+    z-index: 100;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
 }
-.section1 .cover_footer div{
+.section1 .cover_footer .dot{
     width: 10px;
     height: 10px;
     border-radius: 50%;
     background-color: var(--text1);
 }
-.section1 .cover_footer div.active{
+.section1 .cover_footer .dot.active, .section1 .cover_footer .dot:hover{
     background-color: var(--secondary2-color);
 }
 /*--------------------------------- section 2 ---------------------------------*/
@@ -516,6 +563,41 @@ footer .social-icons img:hover{
         display: none;
     }
 }
+/*--------------------------------- section 5 ---------------------------------*/
+.section5 .s5card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--text2);
+    border-radius: 20px;
+    padding: 40px;
+    height: 100%;
+    position: relative;
+}
+.section5 .card img:hover{
+    transform: scale(1.05);
+}
+
+.section5 > .content{
+    display: grid;
+    grid-template-areas:
+    "c1 c1 c3 c3"
+    "c1 c1 c2 c4";
+}
+.section5 .card .content{
+    position: absolute;
+    bottom: 20px;
+    left: 50px;
+    display: flex;
+    flex-direction: column;
+
+}
+#card1 {
+    grid-area: c1;
+}
+#card2 {grid-area: c2}
+#card3 {grid-area: c3}
+#card4 {grid-area: c4}
 
 
 /*--------------------------- media queries ---------------------------*/
@@ -539,49 +621,21 @@ footer .social-icons img:hover{
         font-size: 50px;
     }
     /*-------------------------------*/
-
-
-    .section5{
-        gap: 0;
-    }
-    .section5 .card{
-        padding: 30px;
-        width: 450px;
-        height: 450px;
-    }
-    .section5 .card > img{
-        height: 60px;
-    }
-    .section5 .card p{
-        font-size: 20px;
-    }
-    .section5 .card .card-footer img{
-        width: 60px;
-    }
-    .section5 .card .card-footer div h1{
-        font-size: 22px;
-    }
-    .section5 .card .card-footer div p{
-        font-size: 18px;
-    }
-    .section5-left img{
-        height: 500px;
-        width: 550px;
-    }
-    .section5-btn .btn{
-        width: 70px;
-        height: 70px;
-        padding: 15px;
-    }
 }
 /*------------------- max width 1279 -------------------*/
 @media (max-width: 1279px) {
-    /* ----------------------------- */
-    footer > div {
-        padding: 10px;
+    .section1 .s1-content h1{
+        font-size: 35px;
+    }
+    .section1 .cover_head{
+        padding-left: 10px;
     }
     .section3 .content .category{
         flex: 0 0 calc(100% /5 -  40px*4 /5);
+    }
+    /* ----------------------------- */
+    footer > div {
+        padding: 10px;
     }
 }
 /*------------------- max width 1023 -------------------*/
@@ -604,20 +658,19 @@ footer .social-icons img:hover{
     .section1 a{
         font-size: 14px;
     }
+    .section1 .s1-content div{
+        font-size: 16px;
+    }
     .section1 .s1-content h1{
         font-size: 26px;
-        flex: 70%;
     }
     .section1 .s1-content a{
         font-size: 14px;
     }
-    .section1 .cover_head{
-        padding-left: 10px;
-    }
     .section1 .cover_footer{
         gap: 5px;
     }
-    .section1 .cover_footer div{
+    .section1 .cover_footer .dot{
         width: 8px;
         height: 8px;
     }
@@ -636,12 +689,35 @@ footer .social-icons img:hover{
 }
 /*------------------- max width 767 -------------------*/
 @media (max-width:767px ) {
+    section .header .left .bottom h1 {
+        font-size: 24px;
+    }
+    section .header .left .bottom {
+        flex-direction: column;
+        gap: 10px;
+        align-items: start;
+    }
     .section1 aside, .section1 hr {
         display: none;
     }
-
-    .section1 .cover {
+    .section1 .slider {
         width: 100%;
+    }
+    .section1 .s1-content div{
+        font-size: 14px;
+    }
+    .section1 .s1-content h1{
+        font-size: 22px;
+    }
+
+    .section3 .content .category {
+        flex: 0 0 calc(100% /3 -  40px*2 /3);
+    }
+    .section5 .content{
+        gap: 10px;
+        grid-template-areas:
+        "c3 c2 c4"
+        "c1 c1 c1";
     }
 
     /*-------------------------------*/
@@ -655,3 +731,16 @@ footer .social-icons img:hover{
         max-width: 100%;
     }
 }
+
+@keyframes display{
+    from{
+        opacity: 0.4;
+        /*transform: translateX(100%);*/
+    }
+    to{
+        opacity: 1;
+        /*transform: translateX(0);*/
+    }
+}
+
+
