@@ -1,0 +1,160 @@
+.user-menu{
+    background-color: rgb(0, 0, 0, 0.5);
+}
+.contact-content{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 30px;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 50px;
+}
+.contact-content .call{
+    display: flex;
+    flex-direction: column;
+}
+.call .head{
+    display: flex;
+    align-items: center;
+    gap : 10px;
+    margin-bottom: 20px;
+}
+.call .head h1{
+    font-size: 20px;
+    font-weight: 500;
+    margin-left: 10px;
+    margin-bottom: 0;
+}
+.call p{
+    font-size: 14px;
+    max-width: 90%;
+    font-weight: 400;
+    margin-top: 10px;
+}
+
+.call .head div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--secondary2-color);
+    padding: 10px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+.call .head img{
+    filter: invert(1);
+}
+.call .body p{
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 10px;
+}
+.contact-content .contact-form{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+.contact-form form{
+    height: 100%;
+    display: grid;
+    grid-template-areas:
+            "n e p"
+            "m m m"
+            ". . b";
+    gap: 20px;
+}
+#name{
+    grid-area: n;
+}
+#email{
+    grid-column: e;
+}
+#phone{
+    grid-column: p;
+}
+#message{
+    grid-area: m;
+}
+
+.contact-form .btn{
+    grid-area: b;
+    height: 60px;
+    padding: 10px;
+    border: none;
+    background-color: var(--button2);
+    color: var(--text);
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.contact-form .btn:hover{
+    background-color: var(--button2-hover);
+}
+.contact-form form input, .contact-form form textarea{
+    width: 100%;
+    padding: 10px 20px ;
+    background-color: #eee;
+    margin: 0;
+    border: none;
+    height: 60px;
+    font-size: 14px;
+}
+.contact-form form textarea{
+    height: 200px;
+    resize: none;
+}
+.contact .card{
+    height: 100%;
+    padding: 40px;
+    background-color: var(--primary-color);
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+hr{
+    margin: 20px 0;
+    border: 1px solid var(--text2);
+}
+@media screen and (max-width: 1023px){
+    .contact-content{
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+@media screen and (max-width: 1023px) {
+
+    .contact-form form {
+        width: 90vw;
+        grid-template-areas:
+            "n"
+            "e"
+            "p"
+            "m"
+            "b";
+    }
+    .contact-content .call {
+        margin-bottom: 20px;
+    }
+    .contact-content {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .contact-content .contact-form {
+        margin-top: 20px;
+    }
+
+    .contact-form form {
+        gap: 10px;
+    }
+
+    .contact-form form input, .contact-form form textarea {
+        padding: 10px 10px;
+    }
+
+    .contact-form .btn {
+        padding: 10px;
+    }
+}
+

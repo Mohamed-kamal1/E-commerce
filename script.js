@@ -1,7 +1,4 @@
-if(window.location.href.includes('Home.html') || window.location.href.includes('Cart.html') )
-  updateCartNumber();
-
-
+updateCartNumber();
 function openUserMenu() {
   document.querySelector('.user-menu').classList.toggle('open');
 }
@@ -38,7 +35,7 @@ function validateLogin() {
     return false;
   }
   localStorage.setItem('loggedInUser', JSON.stringify(user));
-  window.location.href = 'Home.html';
+  window.location.href = '../Home.html';
     return false;
 }
 function isLoggedIn() {
@@ -46,15 +43,30 @@ function isLoggedIn() {
 }
 // Check if user is logged in
 document.addEventListener('DOMContentLoaded', function() {
-  const homeLink = document.querySelector('a[href="Home.html"]');
-  if (homeLink) {
-    homeLink.addEventListener('click', function(event) {
-      if (!isLoggedIn()) {
+  if (!isLoggedIn()){
+    let homeLink = document.querySelector('a[href="Home.html"]');
+    let homeLink2 = document.querySelectorAll('a[href="../Home.html"]');
+    if (homeLink) {
+      homeLink.addEventListener('click', function(event) {
         event.preventDefault();
         alert('You must be logged in to access the home page.');
-      }
-    });
+      });
+    }
+    if (homeLink2) {
+      homeLink2.forEach(homeLink => homeLink.addEventListener('click', function(event) {
+            event.preventDefault();
+            alert('You must be logged in to access the home page.');
+          })
+      )
+    }
+    let search = document.querySelector('.nav-right');
+    let register = document.querySelector('.register');
+    search.style.display = 'none';
+    register.classList.add('d-lg-block');
+
+
   }
+
 });
 
 // logout
@@ -83,70 +95,109 @@ function logout() {
         }, false)
       })
 })()
-// Scroll cards
-function scrollCards(direction ,section_number) {
-  let section, card, value ;
-  switch (section_number) {
-    case 2:
-      card = '.card';
-      section = 'today\'s';
-      break;
-    case 3:
-      card ='.category';
-      section = 'categories' ;
-      break;
-    case 4:
-        card ='.card';
-        section = 'bestSellers';
-        break;
+/////////////////////////////////////////////////////////////////////////////
+if(window.location.href.includes('Home.html')){
+  const Cards = document.querySelectorAll('.card');
+  let countDownDate = new Date("OCT 10, 2024 00:00:00").getTime();
+  Cards.forEach((card) => {
+    let addToCart = card.querySelector('.addToCart');
+    addToCart.addEventListener('click', () => addProduct(card));
+  });
+  Timer(countDownDate);
+}
+/////////////////////////////////////////////////////////////////////////////
+if(window.location.href.includes('Cart.html')){
+  let products =  JSON.parse(localStorage.getItem('products')) || [];
 
-  }
-  value = document.querySelector(card).offsetWidth + 40 ;
-  value =  direction === 'left' ? value*-1: value;
-  document.getElementById(section).scrollBy({
-    left: value, // Adjust this value based on card width
-    behavior: 'smooth'
+  updateCheckout();
+  products.forEach(product => createProduct(product));
+  localStorage.setItem('products', JSON.stringify(products));
+  // Clear cart
+  document.querySelector('.clear-cart').addEventListener('click', () => {
+    localStorage.removeItem('products');
+    window.location.reload();
   });
 }
 /////////////////////////////////////////////////////////////////////////////
-const Cards = document.querySelectorAll('.card');
-Cards.forEach((card) => {
-  if(window.location.href.includes('Home.html')){
-    let addToCart = card.querySelector('.addToCart');
-    addToCart.addEventListener('click', () => {
-      const products =  JSON.parse(localStorage.getItem('products')) || [];
-      let exist = products.find(product => product.id === parseInt(card.querySelector('.id').innerHTML));
-      if(exist){
-        exist.quantity += 1;
-      }
-      else {
-        products.push(
-            {
-              id:parseInt( card.querySelector('.id').innerHTML),
-              image: card.querySelector('.card-image').querySelector('img').src,
-              title: card.querySelector('.card-content').querySelector('h1').innerHTML,
-              price: card.querySelector('.price').innerHTML.split('<')[0].slice(1),
-              quantity: 1,
-            }
-        );
-      }
-      localStorage.setItem('products', JSON.stringify(products));
-    });
+if(window.location.href.includes('Billing.html')){
+    updateCheckout();
   }
-});
-/////////////////////////////////////////////////////////////////////////////
-let cart = document.querySelector('.cart-items');
-const products =  JSON.parse(localStorage.getItem('products')) || [];
-if(window.location.href.includes('Cart.html')){
-  updateCheckout();
-  products.forEach(product => {
+
+
+
+// Timer
+function Timer(countDownDate) {
+  {
+    let Timer = document.querySelector('.timer');
+    let x = setInterval(function () {
+      let now = new Date().getTime();
+      let distance = countDownDate - now;
+      let days = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2);
+      let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2);
+      let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2);
+      let seconds = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2);
+      if (distance < 0) {
+        clearInterval(x);
+      } else {
+        Timer.innerHTML = `
+            <div class="block">
+                <span>Days</span>
+                <span>${days}</span>
+            </div>
+            <span>:</span>
+            <div class="block">
+                <span>Hours</span>
+                <span>${hours}</span>
+            </div>
+            <span>:</span>
+            <div class="block">
+                <span>Minutes</span>
+                <span>${minutes}</span>
+            </div>
+            <span>:</span>
+            <div class="block">
+                <span>Seconds</span>
+                <span>${seconds}</span>
+            </div>
+            `;
+      }
+    }, 1000);
+
+
+  }
+}
+// Add product
+function addProduct(card) {
+    const products =  JSON.parse(localStorage.getItem('products')) || [];
+    let exist = products.find(product => product.id === parseInt(card.querySelector('.id').innerHTML));
+    if(exist){
+      exist.quantity += 1;
+    }
+    else {
+      products.push(
+          {
+            id:parseInt( card.querySelector('.id').innerHTML),
+            image: card.querySelector('.card-image').querySelector('img').src,
+            title: card.querySelector('.card-content').querySelector('h1').innerHTML,
+            price: card.querySelector('.price').innerHTML.split('<')[0].slice(1),
+            quantity: 1,
+          }
+      );
+    }
+    localStorage.setItem('products', JSON.stringify(products));
+    updateCartNumber();
+  }
+// create product
+function createProduct(product){
+  {
+    let cart = document.querySelector('.cart-items');
     let item = document.createElement('div');
     item.classList.add('card');
     item.innerHTML = `
           <div class="card-image">
             <img src="${product.image}" alt="">
             <div class="delete">
-            <img src="assets/close.png" alt="">
+            <img src="../assets/close.png" alt="">
             </div>
           </div>
           <h1 class="price">$${product.price}</h1>
@@ -156,81 +207,65 @@ if(window.location.href.includes('Cart.html')){
           <h1 class="total-price">$${product.quantity*product.price}</h1>
   `;
     cart.appendChild(item);
-    item.querySelector('.quantity').querySelector('input').addEventListener('change', () => {
-      product.quantity = item.querySelector('.quantity').querySelector('input').value;
-      item.querySelector('.total-price').innerHTML = `$${product.quantity*product.price}`;
-      localStorage.setItem('products', JSON.stringify(products));
-        updateCheckout();
-
-    });
-    item.querySelector('.delete').addEventListener('click', () => {
-      products.splice(products.indexOf(product), 1);
-      localStorage.setItem('products', JSON.stringify(products));
-      item.remove();
+    let quantity = item.querySelector('.quantity').querySelector('input');
+    quantity.addEventListener('change', () => {
+      updateQuantity(product.id,quantity.value);
+      item.querySelector('.total-price').innerHTML = `$${quantity.value*product.price}`;
       updateCheckout();
-      updateCartNumber();
 
     });
-  });
-  // Update checkout
-  function updateCheckout(){
-    let checkout = document.querySelector('.checkout');
-    let total = products.reduce((acc, product) => acc + product.price*product.quantity, 0);
-    checkout.querySelector('.subtotal').querySelectorAll('h1')[1].innerHTML = `$${total}`;
-    checkout.querySelector('.tax').querySelectorAll('h1')[1].innerHTML = `$${Math.ceil(total*0.14)}`;
-    checkout.querySelector('.total').querySelectorAll('h1')[1].innerHTML = `$${total + Math.ceil(total*0.14)}`;
+    item.querySelector('.delete').addEventListener('click', () =>
+    {
+      deleteProduct(product)
+        item.remove();
+    });
   }
-  // Clear cart
-  document.querySelector('.clear-cart').addEventListener('click', () => {
-    localStorage.removeItem('products');
-    window.location.reload();
-  });
-}
-/////////////////////////////////////////////////////////////////////////////
-if(window.location.href.includes('Home.html')){
-  let Timer = document.querySelector('.timer');
-  let countDownDate = new Date("OCT 10, 2024 00:00:00").getTime();
-    let x = setInterval(function() {
-        let now = new Date().getTime();
-        let distance = countDownDate - now;
-        let days = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2,0);
-        let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2,0);
-        let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2,0);
-        let seconds = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2,0);
-        if (distance < 0) {
-        clearInterval(x);
-        }
-        else {
-            Timer.innerHTML = `
-            <div>
-                <span>Days</span>
-                <span>${days}</span>
-            </div>
-            <span>:</span>
-            <div>
-                <span>Hours</span>
-                <span>${hours}</span>
-            </div>
-            <span>:</span>
-            <div>
-                <span>Minutes</span>
-                <span>${minutes}</span>
-            </div>
-            <span>:</span>
-            <div>
-                <span>Seconds</span>
-                <span>${seconds}</span>
-            </div>
-            `;
-        }
-    }, 1000);
-
-
 }
 // Update cart number
 function updateCartNumber(){
   let products =  JSON.parse(localStorage.getItem('products')) || [];
-  document.querySelector('.cart-number').innerHTML = products.length;
-  products.length === 0 ? document.querySelector('.cart-number').style.display = 'none' : document.querySelector('.cart-number').style.display = 'flex';
+  let cartNumber = document.querySelector('.cart-number');
+  if(cartNumber){
+    cartNumber.innerHTML = products.length.toString();
+    products.length === 0 ? cartNumber.style.display = 'none' : cartNumber.style.display = 'flex';
+  }
+}
+// Update checkout
+function updateCheckout(){
+  let products =  JSON.parse(localStorage.getItem('products')) || [];
+  let checkout = document.querySelector('.checkout');
+  let total = products.reduce((acc, product) => acc + product.price*product.quantity, 0);
+  checkout.querySelector('.subtotal').querySelectorAll('h1')[1].innerHTML = `$${total}`;
+  checkout.querySelector('.tax').querySelectorAll('h1')[1].innerHTML = `$${Math.ceil(total*0.14)}`;
+  checkout.querySelector('.total').querySelectorAll('h1')[1].innerHTML = `$${total + Math.ceil(total*0.14)}`;
+}
+// Update quantity
+function updateQuantity(id , value){
+    let products =  JSON.parse(localStorage.getItem('products')) || [];
+    let product = products.find(product => product.id === id);
+    product.quantity = value;
+    localStorage.setItem('products', JSON.stringify(products));
+}
+// delete product
+function deleteProduct(product){
+  let products =  JSON.parse(localStorage.getItem('products')) || [];
+  products.splice(products.indexOf(product), 1);
+  localStorage.setItem('products', JSON.stringify(products));
+  updateCartNumber();
+  updateCheckout();
 }
 
+// Update billing
+function bank(){
+  let credit = document.getElementById('creditCard');
+  if(credit.checked){
+    document.querySelector('.cardNumber').style.display = 'block';
+    document.querySelector('.expiryDate').style.display = 'block';
+    document.querySelector('.cvv').style.display = 'block';
+  }
+    else {
+        document.querySelector('.cardNumber').style.display = 'none';
+        document.querySelector('.expiryDate').style.display = 'none';
+        document.querySelector('.cvv').style.display = 'none';
+    }
+}

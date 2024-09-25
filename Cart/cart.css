@@ -1,7 +1,6 @@
-main{
+.cart{
     display: flex;
     flex-direction: column;
-    margin-top: 50px;
 }
 .cart-cards{
     display: flex;
@@ -93,8 +92,7 @@ main{
 }
 
 .cart-cards .card .price ,.cart-cards .card .total-price{
-}
-.cart-cards .footer .btn{
+}.cart .footer .btn{
     background-color: var(--button2);
     color: var(--text);
     padding: 16px 48px;
@@ -109,19 +107,16 @@ main{
     align-self: end;
 
 }
-
-.cart-cards .footer{
+.cart .footer{
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     margin: 20px;
 }
-
-.cart-cards .footer .coupon{
+.cart .footer .coupon{
     display: flex;
     gap: 0;
-}
-.cart-cards .footer .coupon input{
+}.cart .footer .coupon input{
     width: 300px;
     height: 50px;
     border: 1px solid rgba(0, 0, 0, 0.4);
@@ -129,16 +124,14 @@ main{
     font-size: 16px;
     text-align: center;
     margin: 0;
-}
-.cart-cards .footer .coupon .btn{
+}.cart .footer .coupon .btn{
     padding: inherit;
     margin: 0;
     height: 50px;
     width: 200px;
     text-align: center;
     border-radius: 0 5px 5px 0;
-}
-.cart-cards .footer .checkout{
+}.cart .footer .checkout{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -161,23 +154,54 @@ hr{
     font-weight: 500;
 
 }
-
-.cart-cards .footer .checkout div{
+.cart .footer .checkout div{
     display: flex;
     justify-content: space-between;
-}
-.cart-cards .footer .checkout .total{
+}.cart .footer .checkout .total{
 }
 
 @media (max-width: 1200px){
-    .cart-cards .footer{
+    .cart .footer{
         flex-direction: column;
         align-items: center;
         gap: 40px;
     }
 }
 
-@media (max-width: 768px){
-
+@media (max-width: 767px){
+    .cart-cards .card{
+        padding: 20px;
+    }
+    .cart-cards .card h1{
+    }
+    .cart-cards .card input[type="number"] {
+        width: 100px;
+    }
+    .cart-cards .header h1:nth-child(2){
+        display: none;
+    }
+    .cart-cards .card .price{
+        display: none;
+    }
+    .cart-cards .card .card-image{
+    }
+    .cart-cards .card img{
+        height: 60px;
+    }
+    .cart-cards .card .delete{
+        top: 0;
+        left: 0;
+    }
+    .cart .footer .coupon input{
+        width: 100%;
+    }
+    .cart .footer .coupon .btn{
+        width: 100%;
+    }
+    .cart .footer .checkout{
+        width: 100%;
+    }
+    .cart .footer .btn{
+        margin: 0;
+    }
 }
-

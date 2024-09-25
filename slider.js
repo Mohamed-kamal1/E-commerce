@@ -46,3 +46,29 @@ function next() {
 function pre() {
     slideShow(slideIndex -= 1);
 }
+
+// Scroll cards
+function scrollCards(direction ,section_number) {
+    let section, card, value ;
+    switch (section_number) {
+        case 2:
+            card = '.card';
+            section = 'today\'s';
+            break;
+        case 3:
+            card ='.category';
+            section = 'categories' ;
+            break;
+        case 4:
+            card ='.card';
+            section = 'bestSellers';
+            break;
+
+    }
+    value = document.querySelector(card).offsetWidth + 40 ;
+    value =  direction === 'left' ? value*-1: value;
+    document.getElementById(section).scrollBy({
+        left: value, // Adjust this value based on card width
+        behavior: 'smooth'
+    });
+}

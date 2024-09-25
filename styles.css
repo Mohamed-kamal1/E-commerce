@@ -16,7 +16,6 @@
     --ultramarine : #120A8F;
     --desert-sand: #878681;
     transition: 0.3s;
-
 }
 
 img{
@@ -138,6 +137,20 @@ header{
 }
 
 /*--------------------------------- main ---------------------------------*/
+main > .header {
+    display: flex;
+    gap: 10px;
+    padding: 60px 20px;
+    font-size: 16px;
+    color: var(--text1);
+    font-weight: 500;
+}
+main > .header a{
+    color: var(--text1);
+}
+main > .header .active{
+    color: var(--text2);
+}
 section{
     display: flex;
     flex-direction: column;
@@ -443,7 +456,7 @@ section .card-content .rate span{
 .section1 .cover_footer{
     position: absolute;
     bottom: 10%;
-    left: calc(50% - 50px);
+    left: calc(50% - 45px);
     z-index: 100;
     display: flex;
     align-items: center;
@@ -667,14 +680,6 @@ footer .social-icons img:hover{
     .section1 .s1-content a{
         font-size: 14px;
     }
-    .section1 .cover_footer{
-        gap: 5px;
-    }
-    .section1 .cover_footer .dot{
-        width: 8px;
-        height: 8px;
-    }
-
     .section3 .content .category{
         flex: 0 0 calc(100% /4 -  40px*3 /4);
     }
@@ -689,35 +694,92 @@ footer .social-icons img:hover{
 }
 /*------------------- max width 767 -------------------*/
 @media (max-width:767px ) {
+    section .header{
+        flex-direction: column;
+        padding: 0;
+        gap: 20px;
+    }
+    section .header .left {
+      width: 100%;
+    }
     section .header .left .bottom h1 {
-        font-size: 24px;
+        font-size: 22px;
+        margin: 0;
     }
     section .header .left .bottom {
-        flex-direction: column;
         gap: 10px;
-        align-items: start;
     }
+    section .header .left .bottom{
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+    section .header .left .timer{
+        font-size: 20px;
+        gap: 0;
+    }
+    section .header .left .timer div span:first-child{
+        font-size: 9px;
+    }
+    section .header .left .timer div span:last-child{
+        font-size: 22px;
+    }
+    section .header .left .timer > span{
+        font-size: 18px;
+    }
+    section .header .right {
+        align-self: center;
+    }
+
+    section .content{
+        margin: 0;
+    }
+    /*----------------------------*/
     .section1 aside, .section1 hr {
         display: none;
     }
     .section1 .slider {
         width: 100%;
     }
+    .section1 .cover_head{
+        flex-direction: column;
+    }
+    .section1 .s1-content{
+        flex: 100%;
+        gap: 10px;
+    }
+    .section1 .s1-content a{
+        position: absolute;
+        bottom: 15%;
+        left: calc(50% - 50px);
+    }
+
     .section1 .s1-content div{
         font-size: 14px;
     }
     .section1 .s1-content h1{
-        font-size: 22px;
+        font-size: 18px;
+    }
+    .section1 .cover_image {
+        margin: 40px;
     }
 
-    .section3 .content .category {
-        flex: 0 0 calc(100% /3 -  40px*2 /3);
+    /*----------------------------*/
+    section .card ,.section3 .content .category{
+        flex: 0 0 calc(100%);
     }
+
+    /*----------------------------*/
+
+    /*----------------------------*/
     .section5 .content{
         gap: 10px;
         grid-template-areas:
         "c3 c2 c4"
         "c1 c1 c1";
+    }
+    .section5 .s5card{
+        padding: 15px;
     }
 
     /*-------------------------------*/
